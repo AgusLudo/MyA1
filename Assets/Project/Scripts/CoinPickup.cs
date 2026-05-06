@@ -51,10 +51,9 @@ namespace Project.Scripts
 
             // Add particles.
             var pe = Instantiate(particlesPrefab, position, Quaternion.identity, transform);
-            Destroy(pe, 2.5f); // TODO: Destroy after particles are finished
+            Destroy(pe, 2.5f); 
 
-            // Show the score text float.
-            // TODO: The score doesn't seem to be positioned exactly over the coin.
+           
             var scoreText = Instantiate(scorePrefab, _canvas.transform, true);
             scoreText.GetComponent<Text>().text = _score.ToString();
 
@@ -62,7 +61,7 @@ namespace Project.Scripts
             var screenPoint = Camera.main.WorldToScreenPoint(position);
             scoreText.transform.position = screenPoint;
 
-            // Instead of destroying the coin, just hide it.
+            
             for (var i = 0; i < _renderers.Length; ++i)
             {
                 _renderers[i].enabled = false;

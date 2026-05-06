@@ -156,7 +156,7 @@ namespace Project.Scripts
             var shift = Input.GetAxisRaw("Horizontal") * (shiftDown ? 1 : 0);
 
             var delayedDummySpawn = false;
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !_anim.GetBool(IsJumping))
             {
                 _anim.SetBool(IsJumping, true);
                 GameData.Singleton.SoundJump.Play();
@@ -171,20 +171,26 @@ namespace Project.Scripts
                 transform.Rotate(Vector3.up * 90);
                 GameData.Singleton.SoundWhoosh.Play();
                 delayedDummySpawn = true;
+                _canTurn = false;
             }
             else if (rotate < 0 && _canTurn)
             {
                 transform.Rotate(Vector3.up * -90);
                 GameData.Singleton.SoundWhoosh.Play();
                 delayedDummySpawn = true;
+                _canTurn= false;
             }
             else if (shift > 0)
             {
                 transform.Translate(0.5f, 0, 0);
+                
+                
             }
             else if (shift < 0)
             {
                 transform.Translate(-0.5f, 0, 0);
+               
+                
             }
 
             if (!delayedDummySpawn) return;
@@ -200,6 +206,15 @@ namespace Project.Scripts
             }
 
             transform.position = new Vector3(_startPosition.x, tf.position.y, _startPosition.z);
+        }
+        private void ResetRightRotation()
+        {
+            transform.Rotate(0f, -45f, 0f);
+        }
+
+        private void ResetLeftRotation()
+        {
+            transform.Rotate(0f, 45f, 0f);
         }
 
         private void RestartGame()
