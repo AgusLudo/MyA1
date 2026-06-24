@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Project.Scripts
 {
@@ -24,6 +25,10 @@ namespace Project.Scripts
 
         private int _score;
         private int _highScore;
+        private bool _doubleScoreActive;
+        private Coroutine _doubleScoreCoroutine;
+        private bool _invincibleActive;
+        private Coroutine _invincibleCoroutine;
 
         [NotNull]
         public AudioSource SoundPickup => _sfx[0];
@@ -48,12 +53,21 @@ namespace Project.Scripts
 
         [NotNull]
         public AudioSource SoundWhoosh => _sfx[7];
+        public bool IsDoubleScoreActive => _doubleScoreActive;
+        public bool IsInvincibleActive => _invincibleActive;
 
         public void AddScore(int value)
         {
+            if (_doubleScoreActive)
+            {
+                value *= 2;
+            }
+
             _score += value;
+
             PlayerPrefs.SetInt(PlayerPrefKeys.Score, _score);
             PlayerPrefs.SetInt(PlayerPrefKeys.LastScore, _score);
+
             UpdateScoreDisplay();
             UpdateHighscore();
         }
@@ -153,6 +167,45 @@ namespace Project.Scripts
             {
                 highscoreText.text = $"Highscore: {_highScore}";
             }
+        }
+        public void ActivateDoubleScore(float duration)
+        {
+            if (_doubleScoreCoroutine != null)
+            {
+                StopCoroutine(_doubleScoreCoroutine);
+            }
+
+            _doubleScoreCoroutine = StartCoroutine(DoubleScoreRoutine(duration));
+        }
+
+        private IEnumerator DoubleScoreRoutine(float duration)
+        {
+            _doubleScoreActive = true;
+
+            yield return new WaitForSeconds(duration);
+
+            _doubleScoreActive = false;
+            _doubleScoreCoroutine = null;
+        }
+
+        public void ActivateInvincibility(float duration)
+        {
+            if (_invincibleCoroutine != null)
+            {
+                StopCoroutine(_invincibleCoroutine);
+            }
+
+            _invincibleCoroutine = StartCoroutine(InvincibilityRoutine(duration));
+        }
+
+        private IEnumerator InvincibilityRoutine(float duration)
+        {
+            _invincibleActive = true;
+
+            yield return new WaitForSeconds(duration);
+
+            _invincibleActive = false;
+            _invincibleCoroutine = null;
         }
     }
 }

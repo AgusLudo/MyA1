@@ -47,16 +47,22 @@ namespace Project.Scripts
             var position = transform.position;
 
             GameData.Singleton.SoundPickup.Play();
+
+            int displayedScore = _score;
+
+            if (GameData.Singleton.IsDoubleScoreActive)
+            {
+                displayedScore *= 2;
+            }
+
             GameData.Singleton.AddScore(_score);
 
             // Add particles.
             var pe = Instantiate(particlesPrefab, position, Quaternion.identity, transform);
-            Destroy(pe, 2.5f); 
+            Destroy(pe, 2.5f);
 
-           
             var scoreText = Instantiate(scorePrefab, _canvas.transform, true);
-            scoreText.GetComponent<Text>().text = _score.ToString();
-
+            scoreText.GetComponent<Text>().text = displayedScore.ToString();
             Debug.Assert(Camera.main != null, "Camera.main != null");
             var screenPoint = Camera.main.WorldToScreenPoint(position);
             scoreText.transform.position = screenPoint;

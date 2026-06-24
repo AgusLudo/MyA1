@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections;
 using System;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -35,6 +35,8 @@ namespace Project.Scripts
         private Vector3 _startPosition;
         private int _livesLeft;
         private bool _falling;
+        private bool _controlsInverted;
+        private Coroutine _controlsInvertedCoroutine;
 
         private void Awake()
         {
@@ -64,7 +66,8 @@ namespace Project.Scripts
             var isDangerousCollision = other != null && (other.gameObject.CompareTag("Fire") ||
                                                          other.gameObject.CompareTag("Wall") ||
                                                          other.gameObject.CompareTag("OuterSpace"));
-            var isLifeThreat = _falling || isDangerousCollision;
+            var isLifeThreat = _falling ||
+                   (isDangerousCollision && !GameData.Singleton.IsInvincibleActive);
             if (isLifeThreat && !Dead)
             {
                 _anim.SetTrigger(_falling ? IsFalling : IsDead);
@@ -115,23 +118,20 @@ namespace Project.Scripts
         {
             if (Dead) return;
 
+            // morir al caer al vacio
+            if (transform.position.y <= -10f)
+            {
+                _falling = true;
+                OnCollisionEnter(null);
+                return;
+            }
+
             if (CurrentPlatform != null)
             {
-                
                 const float shortFallingDistance = 2f;
                 if (transform.position.y < CurrentPlatform.transform.position.y - shortFallingDistance)
                 {
                     _anim.SetTrigger(IsFalling);
-                }
-
-                const float fallingDistance = 10f;
-                if (transform.position.y < CurrentPlatform.transform.position.y - fallingDistance)
-                {
-                    _falling = true;
-
-                    
-                    OnCollisionEnter(null);
-                    return;
                 }
             }
 
@@ -140,6 +140,12 @@ namespace Project.Scripts
 
             var shiftDown = Input.GetButtonDown("Horizontal");
             var shift = Input.GetAxisRaw("Horizontal") * (shiftDown ? 1 : 0);
+
+            if (_controlsInverted)
+            {
+                rotate *= -1;
+                shift *= -1;
+            }
 
             var delayedDummySpawn = false;
             if (Input.GetButtonDown("Jump") && !_anim.GetBool(IsJumping))
@@ -206,6 +212,26 @@ namespace Project.Scripts
         private void RestartGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        }
+
+        public void ActivateInvertedControls(float duration)
+        {
+            if (_controlsInvertedCoroutine != null)
+            {
+                StopCoroutine(_controlsInvertedCoroutine);
+            }
+
+            _controlsInvertedCoroutine = StartCoroutine(InvertedControlsRoutine(duration));
+        }
+
+        private IEnumerator InvertedControlsRoutine(float duration)
+        {
+            _controlsInverted = true;
+
+            yield return new WaitForSeconds(duration);
+
+            _controlsInverted = false;
+            _controlsInvertedCoroutine = null;
         }
 
         [UsedImplicitly]
