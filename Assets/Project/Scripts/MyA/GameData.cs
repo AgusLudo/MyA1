@@ -29,6 +29,10 @@ namespace Project.Scripts
         private Coroutine _doubleScoreCoroutine;
         private bool _invincibleActive;
         private Coroutine _invincibleCoroutine;
+        private bool _scoreFrozen;
+        private Coroutine _scoreFrozenCoroutine;
+
+        public bool IsScoreFrozen => _scoreFrozen;
 
         [NotNull]
         public AudioSource SoundPickup => _sfx[0];
@@ -58,6 +62,11 @@ namespace Project.Scripts
 
         public void AddScore(int value)
         {
+            if (_scoreFrozen)
+            {
+                return;
+            }
+
             if (_doubleScoreActive)
             {
                 value *= 2;
@@ -176,6 +185,26 @@ namespace Project.Scripts
             }
 
             _doubleScoreCoroutine = StartCoroutine(DoubleScoreRoutine(duration));
+        }
+
+        public void ActivateScoreFrozen(float duration)
+        {
+            if (_scoreFrozenCoroutine != null)
+            {
+                StopCoroutine(_scoreFrozenCoroutine);
+            }
+
+            _scoreFrozenCoroutine = StartCoroutine(ScoreFrozenRoutine(duration));
+        }
+
+        private IEnumerator ScoreFrozenRoutine(float duration)
+        {
+            _scoreFrozen = true;
+
+            yield return new WaitForSeconds(duration);
+
+            _scoreFrozen = false;
+            _scoreFrozenCoroutine = null;
         }
 
         private IEnumerator DoubleScoreRoutine(float duration)

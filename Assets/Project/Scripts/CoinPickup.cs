@@ -61,13 +61,17 @@ namespace Project.Scripts
             var pe = Instantiate(particlesPrefab, position, Quaternion.identity, transform);
             Destroy(pe, 2.5f);
 
-            var scoreText = Instantiate(scorePrefab, _canvas.transform, true);
-            scoreText.GetComponent<Text>().text = displayedScore.ToString();
-            Debug.Assert(Camera.main != null, "Camera.main != null");
-            var screenPoint = Camera.main.WorldToScreenPoint(position);
-            scoreText.transform.position = screenPoint;
+            if (!GameData.Singleton.IsScoreFrozen)
+            {
+                var scoreText = Instantiate(scorePrefab, _canvas.transform, true);
+                scoreText.GetComponent<Text>().text = displayedScore.ToString();
 
-            
+                Debug.Assert(Camera.main != null, "Camera.main != null");
+                var screenPoint = Camera.main.WorldToScreenPoint(position);
+                scoreText.transform.position = screenPoint;
+            }
+
+
             for (var i = 0; i < _renderers.Length; ++i)
             {
                 _renderers[i].enabled = false;
