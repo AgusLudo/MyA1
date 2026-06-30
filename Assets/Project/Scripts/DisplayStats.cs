@@ -12,20 +12,20 @@ namespace Project.Scripts
         {
             if (PlayerPrefs.HasKey(PlayerPrefKeys.LastScore))
             {
-                lastScore.text = $"Last score: {PlayerPrefs.GetInt(PlayerPrefKeys.LastScore)}";
+                lastScore.text = $"Ultimo puntaje: {PlayerPrefs.GetInt(PlayerPrefKeys.LastScore)}";
             }
             else
             {
-                lastScore.text = "Last score: 0";
+                lastScore.text = "Ultimo puntaje: 0";
             }
 
             if (PlayerPrefs.HasKey(PlayerPrefKeys.Highscore))
             {
-                highestScore.text = $"Highest score: {PlayerPrefs.GetInt(PlayerPrefKeys.Highscore)}";
+                highestScore.text = $"Puntaje alto: {PlayerPrefs.GetInt(PlayerPrefKeys.Highscore)}";
             }
             else
             {
-                highestScore.text = "Highest score: 0";
+                highestScore.text = "Puntaje alto: 0";
             }
         }
     }

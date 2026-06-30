@@ -54,6 +54,7 @@ namespace Project.Scripts
                 return;
 
             GameData.Singleton.ActivateDoubleScore(duration);
+            PowerupUI.Singleton.ShowDoubleScore(duration);
 
             foreach (var r in _renderers)
             {

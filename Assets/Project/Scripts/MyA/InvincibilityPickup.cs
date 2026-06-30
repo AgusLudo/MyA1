@@ -52,6 +52,7 @@ namespace Project.Scripts
                 return;
 
             GameData.Singleton.ActivateInvincibility(duration);
+            PowerupUI.Singleton.ShowShield(duration);
 
             foreach (var r in _renderers)
             {

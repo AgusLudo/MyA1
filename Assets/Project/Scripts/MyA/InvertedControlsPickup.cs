@@ -46,6 +46,7 @@ namespace Project.Scripts
                 return;
 
             var player = other.GetComponent<PlayerController>();
+            PowerupUI.Singleton.ShowInvert(duration);
 
             if (player != null)
             {

@@ -35,6 +35,7 @@ namespace Project.Scripts
             RandomizeScore();
 
             if (_renderers == null) return;
+
             for (var i = 0; i < _renderers.Length; ++i)
             {
                 _renderers[i].enabled = true;
@@ -43,10 +44,23 @@ namespace Project.Scripts
 
         private void OnTriggerEnter([NotNull] Collider other)
         {
-            if (!other.gameObject.CompareTag("Player")) return;
+            if (!other.CompareTag("Player"))
+                return;
+
             var position = transform.position;
 
-            GameData.Singleton.SoundPickup.Play();
+            // Sonido normal o grave según el estado del debuff
+            if (GameData.Singleton.IsScoreFrozen)
+            {
+                GameData.Singleton.SoundPickup.pitch = 0.4f;
+                GameData.Singleton.SoundPickup.Play();
+                Invoke(nameof(ResetPickupPitch), 0.1f);
+            }
+            else
+            {
+                GameData.Singleton.SoundPickup.pitch = 1f;
+                GameData.Singleton.SoundPickup.Play();
+            }
 
             int displayedScore = _score;
 
@@ -57,10 +71,11 @@ namespace Project.Scripts
 
             GameData.Singleton.AddScore(_score);
 
-            // Add particles.
+            // Partículas
             var pe = Instantiate(particlesPrefab, position, Quaternion.identity, transform);
             Destroy(pe, 2.5f);
 
+            // Mostrar popup solo si el puntaje no está congelado
             if (!GameData.Singleton.IsScoreFrozen)
             {
                 var scoreText = Instantiate(scorePrefab, _canvas.transform, true);
@@ -71,11 +86,16 @@ namespace Project.Scripts
                 scoreText.transform.position = screenPoint;
             }
 
-
+            // Ocultar la moneda
             for (var i = 0; i < _renderers.Length; ++i)
             {
                 _renderers[i].enabled = false;
             }
+        }
+
+        private void ResetPickupPitch()
+        {
+            GameData.Singleton.SoundPickup.pitch = 1f;
         }
 
         private void RandomizeScore()
@@ -85,6 +105,7 @@ namespace Project.Scripts
             var material = _isBigCoin ? highValueMaterial : regularMaterial;
 
             if (_renderers == null) return;
+
             for (var i = 0; i < _renderers.Length; ++i)
             {
                 _renderers[i].enabled = true;

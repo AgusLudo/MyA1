@@ -48,6 +48,7 @@ namespace Project.Scripts
                 return;
 
             GameData.Singleton.ActivateScoreFrozen(duration);
+            PowerupUI.Singleton.ShowFrozen(duration);
 
             foreach (var r in _renderers)
             {

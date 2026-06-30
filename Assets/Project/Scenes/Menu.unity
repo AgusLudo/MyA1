@@ -1444,8 +1444,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 033b86b066ec6d779acc1e3c2a4fab7d, type: 3}
-    m_FontSize: 64
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1456,14 +1456,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Use Q and E to turn
-
-    Use A and D to move
-
-    Use Spacebar to jump
-
-    Use
-    Control for Magic'
+  m_Text: " Q y E para doblar\n A y D para moverse\nEspacio para saltar\nCTRL para
+    lanzar hechizo"
 --- !u!222 &366476082
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2536,7 +2530,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Options
+  m_Text: Opciones
 --- !u!222 &1130379013
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2690,7 +2684,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Last Score: 0'
+  m_Text: 'Ultimo puntaje: 0'
 --- !u!222 &1183916079
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2836,7 +2830,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 033b86b066ec6d779acc1e3c2a4fab7d, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 64
     m_FontStyle: 1
     m_BestFit: 0
@@ -2848,7 +2842,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Music Volume
+  m_Text: Musica
 --- !u!222 &1197386345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3387,7 +3381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Salir
 --- !u!222 &1651684108
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3627,7 +3621,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play
+  m_Text: Jugar
 --- !u!222 &1737566028
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4051,9 +4045,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Statistics
-
-'
+  m_Text: Estadisticas
 --- !u!222 &1915925830
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4120,7 +4112,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 033b86b066ec6d779acc1e3c2a4fab7d, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 64
     m_FontStyle: 1
     m_BestFit: 0
@@ -4132,7 +4124,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sound Volume
+  m_Text: Volumen
 --- !u!222 &1956690151
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4418,7 +4410,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Highest Score: 0'
+  m_Text: 'Puntaje alto: 0'
 --- !u!222 &2066886181
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4743,7 +4735,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help
+  m_Text: Controles
 --- !u!222 &2102400174
 CanvasRenderer:
   m_ObjectHideFlags: 0

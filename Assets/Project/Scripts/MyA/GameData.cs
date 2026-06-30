@@ -169,12 +169,12 @@ namespace Project.Scripts
         {
             if (scoreText != null)
             {
-                scoreText.text = $"Score: {_score}";
+                scoreText.text = $"Puntaje: {_score}";
             }
 
             if (highscoreText != null)
             {
-                highscoreText.text = $"Highscore: {_highScore}";
+                highscoreText.text = $"Puntaje mas alto: {_highScore}";
             }
         }
         public void ActivateDoubleScore(float duration)
