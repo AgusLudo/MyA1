@@ -24,7 +24,7 @@ namespace Project.Scripts
 
         private void Update()
         {
-            // TODO: We may want to use the time delta in here ...
+            
             transform.Translate(0, floatSpeed * Time.deltaTime, 0);
 
             _alpha -= fadeSpeed * Time.deltaTime;

@@ -3,11 +3,11 @@ using JetBrains.Annotations;
 namespace Project.Scripts
 {
     /// <summary>
-    /// The keys for <see cref="UnityEngine.PlayerPrefs"/> values.
+    /// Las keys para ver los valores de <see cref="UnityEngine.PlayerPrefs"/>.
     /// </summary>
     internal static class PlayerPrefKeys
     {
-        // TODO: Might as well make these actual properties.
+        
 
         [NotNull]
         public static readonly string SoundVolume = "sfxVolume";

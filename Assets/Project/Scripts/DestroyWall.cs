@@ -27,10 +27,10 @@ namespace Project.Scripts
 
         private void OnEnable()
         {
-            // Re-enable dying collision.
+            // Reactivar collision
             _collider.enabled = true;
 
-            // Reset all the bricks.
+            // Resetear ladrillos
             for (var index = 0; index < bricks.Length; index++)
             {
                 var brick = bricks[index];
@@ -39,7 +39,7 @@ namespace Project.Scripts
                 brick.transform.rotation = _bricksRolations[index];
             }
 
-            // Remove all existing explosions
+            // SAcar explosiones
             foreach (var ps in GetComponentsInChildren<ParticleSystem>())
             {
                 Destroy(ps.gameObject);
@@ -52,17 +52,13 @@ namespace Project.Scripts
 
             GameData.Singleton.SoundExplosion.Play();
 
-            // Spawn and kill explosion particle system.
             var spellPosition = other.contacts[0].point;
             var explosion = Instantiate(explosionPrefab, spellPosition, Quaternion.identity, transform);
-            Destroy(explosion, 2.5f); // TODO: We want this to be longer than the lifetime of the particles.
-
-            // By turning off the dummy wall's collider, we're not really hitting it,
-            // effectively disabling the possibility to die.
+            Destroy(explosion, 2.5f); 
+            
             _collider.enabled = false;
 
-            // Explode the bricks into all directions. Since they're overlapped, they
-            // should blast apart.
+            
             foreach (var rb in _bricksRbs)
             {
                 rb.isKinematic = false;

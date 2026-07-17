@@ -66,19 +66,13 @@ namespace Project.Scripts
         [Serializable]
         public class Item
         {
-            /// <summary>
-            /// The prefab to use.
-            /// </summary>
+            
             public GameObject prefab;
 
-            /// <summary>
-            /// The number of prepared instances of that item.
-            /// </summary>
+            
             public int amount = 1;
 
-            /// <summary>
-            /// Whether or not more instances can be created if we run out of them.
-            /// </summary>
+           
             public bool expandable;
         }
     }

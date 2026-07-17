@@ -3,13 +3,7 @@ using UnityEngine;
 
 namespace Udemy.Scripts
 {
-    /// <summary>
-    /// Apparently an old Unity asset that makes e.g. a camera follow the target smoothly.
-    /// </summary>
-    /// <remarks>
-    /// Some nice benefits here are the delayed turning around of the camera after the player
-    /// changes directions and the "looking down" at the player falling off into space.
-    /// </remarks>
+ 
     public class SmoothFollow : MonoBehaviour
     {
         public Transform target;

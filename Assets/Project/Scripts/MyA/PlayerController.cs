@@ -58,7 +58,7 @@ namespace Project.Scripts
             OnLivesChanged?.Invoke(_livesLeft);
         }
 
-        // ReSharper disable once InconsistentNaming
+        
         
 
         private void OnCollisionEnter([CanBeNull] Collision other)
@@ -191,7 +191,7 @@ namespace Project.Scripts
 
             GenerateWorld.RunDummy();
 
-            // Build more platforms into the future, unless we just generated a T-section
+            
             if (!GenerateWorld.LastPlatform.CompareTag("platformTSection"))
             {
                 GenerateWorld.RunDummy();

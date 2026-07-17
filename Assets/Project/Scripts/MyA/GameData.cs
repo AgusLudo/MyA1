@@ -122,9 +122,7 @@ namespace Project.Scripts
 
         private void Awake()
         {
-            // If this scene creates a new version of the game object, destroy it.
-            // This solves the problem of creating a new instance of the game object
-            // whenever we enter a scene that contains a reference to it.
+            
             var gd = GameObject.FindGameObjectsWithTag("GameData");
             if (gd.Length > 1)
             {
@@ -135,17 +133,17 @@ namespace Project.Scripts
             DontDestroyOnLoad(gameObject);
             Singleton = this;
 
-            // Set current score.
+            
             PlayerPrefs.SetInt(PlayerPrefKeys.Score, 0);
 
-            // Grab all audio sources.
+            
             var audioSources = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
             Debug.Assert(audioSources.Length > 1, "allAS.Length > 0");
 
-            // Note that we're picking the FIRST audio source here, as that's the music.
+            
             _music.Add(audioSources[0]);
 
-            // Note that we're NOT picking the first audio player here, because that's the music.
+            
             for (var i = 1; i < audioSources.Length; ++i)
             {
                 _sfx.Add(audioSources[i]);
